@@ -108,8 +108,8 @@ public final class ServiceMetadataUtils {
             return null;
 
         try {
-            String xPathString = "//ows:OperationsMetadata/ows:Operation[@name = '%s'and ( ./ows:Constraint/ows:AllowedValues/ows:Value = '%s' or ./ows:DCP/ows:HTTP/ows:%s/ows:Constraint/ows:AllowedValues/ows:Value = '%s')]/ows:DCP/ows:HTTP/ows:%s/@xlink:href";
-            String xPathExpr = String.format( xPathString, opName, protocol, binding.getElementName(), protocol, binding.getElementName() );
+            String xPathString = "//ows:OperationsMetadata/ows:Operation[@name = '%s'and ( ./ows:Constraint/ows:AllowedValues/ows:Value = '%s' or ./ows:DCP/ows:HTTP/ows:%s/ows:Constraint/ows:AllowedValues/ows:Value = '%s')]/ows:DCP/ows:HTTP/ows:%s[descendant::ows:Value[text()='%s']]/@xlink:href";
+            String xPathExpr = String.format( xPathString, opName, protocol, binding.getElementName(), protocol, binding.getElementName(), protocol );
             XPath xPath = createXPath();
             String href = getNodeText( xPath, wmtsMetadata, xPathExpr );
             return createEndpoint( href );
